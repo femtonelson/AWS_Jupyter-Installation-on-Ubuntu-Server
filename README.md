@@ -26,7 +26,9 @@ In local CLI (Linux machine in this case), run :
 - $sudo nohup jupyter notebook --allow-root --ip 0.0.0.0 &  || Launch jupyter with root access, bind it with all IPs "0.0.0.0" to enable access from any public IP, type "&" to continue running Jupyter in background even after closing CLI, write the output of this command to the file "nohup"
 - $sudo cat nohup.out  || Display the content of the "nohup" file present in current directory and copy the URL containing the token : 
 <img src="./nohup.out.jpg">
+
 - Replace the private IP address by the public IP assigned to the server : http://aaa.bbb.ccc.ddd:8888/?token=7a657d52b4cfdf77a93de126b589f90bf0d277f7076f8020
+
 - Paste the output link in a web browser to access Jupyter Notebook. Successful ! At this stage, Jupyter Notebook app is up and running with the default Python3 environment 
   provided in the OS.
 <img src="./jupyter-notebook-ok.jpg">
