@@ -42,7 +42,9 @@ Read more here : https://www.anaconda.com/understanding-conda-and-pip/
 - $sudo bash Anaconda3-2019.10-Linux-x86_64.sh  : Install Anaconda. Chosen directory : /home/ubuntu/anaconda3
 <img src="./anaconda-installed-1.jpg">
 <img src="./anaconda-installed-2.jpg">
+
 - Launch Terminal from Jupyter Web Interface
+
 <img src="./terminal-from-web-int.jpg">
 
 - $conda create -n my-python3.6-virtualenv python=3.6  : Create virtual environment with Python version 3.6
