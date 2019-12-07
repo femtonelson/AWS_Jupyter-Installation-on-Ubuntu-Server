@@ -1,7 +1,7 @@
 [Inspired from ]
 
 # Step 0 : Objective
-- Install Jupyter Notebook on a publicly accessible Ubuntu server (AWS EC2 instance)
+- Install Jupyter on a publicly accessible Ubuntu server (AWS EC2 instance).
 - Configure two different Python virtual environments with Python3.6 and Python3.7 interpreters respectively
 - Each Python virtual environment runs with its own specific interpreter, libraries, scripts
 - As such each virtual environment is isolated from others as well as from the default Python environment included in the operating system
@@ -9,39 +9,25 @@
 # Step 1 : Launch Ubuntu Server instance on AWS inside a "public subnet", configure its Route Table, assign Public IP & Security Group
 - Inside a VPC, create a suitable subnet.
 - Configure its route table to allow routing to 0.0.0.0/0 through Internet Gateway.
-- Create a security group to allow incoming connections on port 22 (SSH), port 8888 (port on which Jupyter notebook server will run) and optionally ICMP (ping) port.
-- Launch Ubuntu 18.04 server instance (save private key "My_key_pair.pem"), assign VPC, subnet, security group created above.
+- Create a security group to allow incoming connections on port 22 (SSH), port 8888 (port on which Jupyter server will run) and optionally ICMP (ping) port.
+- Launch Ubuntu 18.04 server instance (save private key "My_key_pair.pem"), assign VPC, subnet, security group created above and public IP aaa.bbb.ccc.ddd.
 
-# Step 2 : Create 03 new Security Groups attached to New_VPC
-- Create a new SG "Private SG": In Inbound rules set [All traffic -> All protocols -> All ports -> 10.0.0.0/16] to enable all incoming traffic from within the VPC.
-  In outbound rules set [All traffic -> All protocols -> All ports -> 0.0.0.0/0] to enable all outgoing traffic to all destinations.
-- Create a new SG "Jumpbox SG": In Inbound rules set [SSH -> TCP -> 22 -> 0.0.0.0/0], [All ICMP - IPv4 -> All -> N/A -> 0.0.0.0/0] to enable incoming SSH/Pings from internet/VPC.
-  In outbound rules set [All traffic -> All protocols -> All ports -> 0.0.0.0/0] to enable all outgoing traffic to all destinations.
-- Create a new SG "NAT SG": In Inbound rules set [All traffic -> All protocols -> All ports -> 10.0.0.0/16] to enable all incoming traffic from within the VPC. Add a second inbound rule [All ICMP - IPv4 -> All -> N/A -> 0.0.0.0/0] to respond to ping requests from the internet.
-  In outbound rules set [All traffic -> All -> All -> 0.0.0.0/0] to enable all outgoing traffic to all destinations.
+# Step 2 : Connect to Server by SSH and proceed with Testing [Linux CLI used here]
+In local CLI (Linux machine in this case), run :
+- sudo chmod 400 My_key_pair.pem : Protect private key by making it read-only
+- sudo ssh -i "My_key_pair.pem" ubuntu@aaa.bbb.ccc.ddd  :  Connect to server by SSH
+- sudo apt-get update || Download the package lists for all packages on the server that need an upgrade
+- sudo apt-get upgrade || Fetch on the server the new packages available and install them
 
-# Step 3 : Launch 03 new instances or machines [Use the same key pair, download "My_key_pair.pem" and keep it for ssh login]
-- Launch a new EC2 instance to be named "Jumpbox" based on Linux 2 AMI -> Instance Type (t2.micro) -> Associate it to New_VPC and Public subnet.
-- Launch a new EC2 instance to be named "FZ Machine" based on Linux 2 AMI -> Instance Type (t2.micro) -> Associate it to New_VPC and Private subnet.
-- Launch a new instance to be named "NAT Instance" with suitable NAT AMI (Amazon Machine Image) from Community AMIs "amzn-ami-vpc-nat" -> Instance Type (t2.micro) -> Associate it to New_VPC and Public subnet.
-- For this particular exercise, auto-assigned IPs of the 03 machines were as follows :
-  Jumpbox (10.0.4.12), NAT Instance (10.0.4.124), FZ Machine (10.0.6.145)
-  
-# Step 4 : Create 02 Route Tables : A public route table and a private route table attached to New_VPC
-- Create Route Table named "Public RT". Under Public RT -> Routes, ensure there are 2 entries : [Destination - 10.0.0.0/16   ->   Target - Local] for routing within VPC and [Destination - 0.0.0.0/0   ->   Target - IGW] for routing connections outside VPC, to the internet and under Public RT -> Subnet associations, associate to previously created Public subnet.
-- Create Route Table named "Private RT". Under Private RT -> Routes, ensure there are 2 entries : [Destination - 10.0.0.0/16   ->   Target - Local] for routing within VPC and [Destination - 0.0.0.0/0   ->   Target - NAT Instance] for routing connections to the internet, through the NAT instance.
 
-# Step 5 : Allocate 02 Elastic IP addresses, to Jumpbox and NAT instance
-- Elastic IPs -->Allocate new address (IP1) --> Associate with Jumpbox
-- Elastic IPs -->Allocate new address (IP2) --> Associate with NAT Instance
 
-# Step 6 : Disable SRC/Dest Check on NAT Instance
-- NAT Instance -> Networking -> Change SRC/Dest. check -> Disabled. This enables the NAT instance to send and receive traffic without being the source or destination of such traffic.
 
-# Step 7 : Connect to Jumpbox by SSH and proceed with Testing [Linux CLI used here]
-In local CLI, run :
-- sudo chmod 400 My_key_pair.pem : Protect this private key by making it read-only
-<img src="./1.jpg">
+
+The tool chosen here for Python virtual environment creation is Conda from the Anaconda repository, which natively supports env. creation with different Python versions.
+Other options typically involve using "pip" (the recommended package installer) and "pew" (python environment wrapper), or pip and virtualenv. 
+Read more here : https://www.anaconda.com/understanding-conda-and-pip/
+
+
 - sudo scp -i "My_key_pair.pem" My_key_pair.pem ec2-user@IP1:/home/ec2-user/ : Copy the private key by ssh from working dir on local 
 machine to Jumpbox at IP1 into the folder /home/ec2-user, same private key is used here for ssh connection
 <img src="./2.jpg">
