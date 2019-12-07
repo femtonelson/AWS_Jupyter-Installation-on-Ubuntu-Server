@@ -33,7 +33,7 @@ In local CLI (Linux machine in this case), run :
   provided in the OS.
 <img src="./jupyter-notebook-ok.jpg">
  
-# Step 3 : Configure Several Python Virtual Environments and link them to Jupyter
+# Step 3 (Final) : Configure Several Python Virtual Environments and link them to Jupyter
 
 The tool chosen here for Python virtual environment creation is Conda from the Anaconda repository, which natively supports env. creation with different Python versions.
 Other options (not covered here) typically involve using "pip" (the recommended package installer) and "pew" (python environment wrapper), or pip and virtualenv. 
@@ -63,5 +63,9 @@ Read more here : https://www.anaconda.com/understanding-conda-and-pip/
 
 <img src="./virtual-envs-added-to-jupyter.jpg">
 
+- Two isolated virtual environments have successfully been created, each with a different Python version. 
+
+<img src="./virtual-env-3.6.jpg">
+<img src="./virtual-env-3.8.jpg">
 
 
