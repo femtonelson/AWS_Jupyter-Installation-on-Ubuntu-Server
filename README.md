@@ -2,7 +2,7 @@
 
 # Step 0 : Objective
 - Install Jupyter on a publicly accessible Ubuntu server (AWS EC2 instance).
-- Configure two different Python virtual environments with Python3.6 and Python3.7 interpreters respectively
+- Configure two different Python virtual environments with Python3.6 and Python3.8 interpreters respectively
 - Each Python virtual environment runs with its own specific interpreter, libraries, scripts
 - As such each virtual environment is isolated from others as well as from the default Python environment included in the operating system
 
@@ -15,7 +15,7 @@
 # Step 2 : Connect to Server by SSH, install PIP (package manager) and Jupyter
 In local CLI (Linux machine in this case), run :
 - $sudo chmod 400 My_key_pair.pem : Protect private key by making it read-only
-- $sudo ssh -i "My_key_pair.pem" ubuntu@aaa.bbb.ccc.ddd  :  Connect to server by SSH, default user "ubuntu"
+- $sudo ssh -i "My_key_pair.pem" ubuntu@aaa.bbb.ccc.ddd  :  Connect to server by SSH, default user "ubuntu" --> Now connected by SSH to the Server
 - $sudo apt-get update : Download the package lists for all packages on the server that need an upgrade
 - $sudo apt-get upgrade -y : Fetch on the server the new packages available and install them 
 
@@ -34,11 +34,25 @@ In local CLI (Linux machine in this case), run :
   provided in the OS.
 <img src="./jupyter-notebook-ok.jpg">
  
-
+# Step 3 : Configure Several Python Virtual Environments and link them to Jupyter
 
 The tool chosen here for Python virtual environment creation is Conda from the Anaconda repository, which natively supports env. creation with different Python versions.
 Other options (not covered here) typically involve using "pip" (the recommended package installer) and "pew" (python environment wrapper), or pip and virtualenv. 
 Read more here : https://www.anaconda.com/understanding-conda-and-pip/
+
+- Get the URL of the latest Anaconda open-source distribution for Linux from https://www.anaconda.com/distribution/#download-section 
+
+- $sudo curl -O https://repo.anaconda.com/archive/Anaconda3-2019.10-Linux-x86_64.sh  : Download Anaconda to the server. Downloaded version here is : "Anaconda3-2019.10-Linux-x86_64.sh"
+- $sudo bash Anaconda3-2019.10-Linux-x86_64.sh  : Install Anaconda. Chosen directory : /home/ubuntu/anaconda3
+<img src="./anaconda-installed-1.jpg">
+<img src="./anaconda-installed-2.jpg">
+
+- Launch Terminal from Jupyter Web Interface
+<img src="./terminal-from-web-int.jpg">
+
+
+- $conda create -n my-python3.6-virtualenv python=3.6  : Create Virtual environment with Python version 3.6
+<img src="./virtual-env-python3.6.jpg">
 
 
 - sudo scp -i "My_key_pair.pem" My_key_pair.pem ec2-user@IP1:/home/ec2-user/ : Copy the private key by ssh from working dir on local 
@@ -55,6 +69,4 @@ Once connected to the Jumpbox, (private key already in the working directory) co
 - sudo wget https://download2.rstudio.org/rstudio-server-rhel-1.1.383-x86_64.rpm : Download a file from internet on FZ machine to check internet connectivity --> Download successful !
 <img src="./Test Download.jpg">
 
-# Step 8 : Clean-up after testing
-- Release all allocated IP addresses to Amazon pool if no longer in use
-- Stop or Terminate EC2 instances no longer in use
+
