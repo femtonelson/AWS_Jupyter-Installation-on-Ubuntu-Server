@@ -32,7 +32,7 @@ In local CLI (Linux machine in this case), run :
 - Paste the output link in a web browser to access Jupyter Notebook. Successful ! At this stage, Jupyter Notebook app is up and running with the default Python3 environment 
   provided in the OS.
 <img src="./jupyter-notebook-ok.jpg">
- 
+
 # Step 3 (Final) : Configure Several Python Virtual Environments and link them to Jupyter
 
 The tool chosen here for Python virtual environment creation is Conda from the Anaconda repository, which natively supports env. creation with different Python versions.
