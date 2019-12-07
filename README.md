@@ -12,25 +12,38 @@
 - Create a security group to allow incoming connections on port 22 (SSH), port 8888 (port on which Jupyter server will run) and optionally ICMP (ping) port.
 - Launch Ubuntu 18.04 server instance (save private key "My_key_pair.pem"), assign VPC, subnet, security group created above and public IP aaa.bbb.ccc.ddd.
 
-# Step 2 : Connect to Server by SSH and proceed with Testing [Linux CLI used here]
+# Step 2 : Connect to Server by SSH, install PIP (package manager) and Jupyter
 In local CLI (Linux machine in this case), run :
-- sudo chmod 400 My_key_pair.pem : Protect private key by making it read-only
-- sudo ssh -i "My_key_pair.pem" ubuntu@aaa.bbb.ccc.ddd  :  Connect to server by SSH
-- sudo apt-get update || Download the package lists for all packages on the server that need an upgrade
-- sudo apt-get upgrade || Fetch on the server the new packages available and install them
+- $sudo chmod 400 My_key_pair.pem : Protect private key by making it read-only
+- $sudo ssh -i "My_key_pair.pem" ubuntu@aaa.bbb.ccc.ddd  :  Connect to server by SSH, default user "ubuntu"
+- $sudo apt-get update : Download the package lists for all packages on the server that need an upgrade
+- $sudo apt-get upgrade -y : Fetch on the server the new packages available and install them 
 
+- $sudo apt install python3-pip : Install pip - python package manager
+- $sudo pip3 --version    : Display pip version
+- $sudo -H pip3 install jupyter  : Install Jupyter using PIP
+- $sudo jupyter --version  : Check Jupyter version
+- $sudo nohup jupyter notebook --allow-root --ip 0.0.0.0 &  || Launch jupyter with root access, bind it with all IPs "0.0.0.0" to enable access from any public IP, type "&" to continue running Jupyter in background even after closing CLI, write the output of this command to the file "nohup"
 
+- $sudo cat nohup.out  || Display the content of the "nohup" file present in current directory and copy the URL containing the token : 
+<img src="./nohup.out.jpg">
 
+- Replace the private IP address by the public IP assigned to the server : http://aaa.bbb.ccc.ddd:8888/?token=7a657d52b4cfdf77a93de126b589f90bf0d277f7076f8020
+
+- Paste the output link in a web browser to access Jupyter Notebook. Successful ! At this stage, Jupyter Notebook app is up and running with the default Python3 environment 
+  provided in the OS.
+<img src="./jupyter-notebook-ok.jpg">
+ 
 
 
 The tool chosen here for Python virtual environment creation is Conda from the Anaconda repository, which natively supports env. creation with different Python versions.
-Other options typically involve using "pip" (the recommended package installer) and "pew" (python environment wrapper), or pip and virtualenv. 
+Other options (not covered here) typically involve using "pip" (the recommended package installer) and "pew" (python environment wrapper), or pip and virtualenv. 
 Read more here : https://www.anaconda.com/understanding-conda-and-pip/
 
 
 - sudo scp -i "My_key_pair.pem" My_key_pair.pem ec2-user@IP1:/home/ec2-user/ : Copy the private key by ssh from working dir on local 
 machine to Jumpbox at IP1 into the folder /home/ec2-user, same private key is used here for ssh connection
-<img src="./2.jpg">
+
 - sudo ssh -i "My_key_pair.pem" ec2-user@IP1 : Connect by SSH to the Jumpbox -> Successful !
 <img src="./Connected to JB.jpg">
 Once connected to the Jumpbox, (private key already in the working directory) connect to FZ machine by running :                          - sudo ssh -i "My_key_pair.pem" ec2-user@10.0.6.145 : Connect to FZ machine  --> Successful !
