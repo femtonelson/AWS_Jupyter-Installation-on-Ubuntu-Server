@@ -1,10 +1,11 @@
 [Inspired from ]
 
 # Step 0 : Objective
-- Install Jupyter Notebook
-- An EC2 instance in the public subnet called "Jumpbox", with a public IP and will serve for managing remotely all instances in the VPC
-- The other instance in the public subnet called "NAT instance", with a public IP, will perform NAT translations.
-- At the end of this exercise, FZ machine should be able to access the internet through the NAT instance and ping www.amazon.com or download a software package.
+- Install Jupyter Notebook on a publicly accessible Ubuntu server (AWS EC2 instance)
+- Configure two different Python virtual environments with Python3.6 and Python3.7 interpreters respectively
+- Each Python virtual environment runs with its own specific interpreter, libraries, scripts
+- As such each virtual environment is isolated from others as well as from the default Python environment included in the operating system
+
 
 # Step 1 : Create a New VPC, Internet Gateway and 2 subnets 
 - Create a new VPC (Virtual Private Cloud), named "New_VPC" in the IPV4 address range, for instance : 10.0.0.0/16.
