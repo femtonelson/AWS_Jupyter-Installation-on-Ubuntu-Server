@@ -36,7 +36,7 @@ In local CLI (Linux machine in this case), run :
 # Step 3 (Final) : Configure Several Python Virtual Environments and link them to Jupyter
 
 The tool chosen here for Python virtual environment creation is Conda from the Anaconda repository, which natively supports env. creation with different Python versions.
-Other options (not covered here) typically involve using "pip" (the recommended package installer) and "pew" (python environment wrapper), or pip and virtualenv. 
+Other options (not covered here) are less starightforward and typically involve using "pip" (package installer) and "pew" (python environment wrapper), or pip and virtualenv. 
 Read more here : https://www.anaconda.com/understanding-conda-and-pip/
 
 - Get the URL of the latest Anaconda open-source distribution for Linux from : https://www.anaconda.com/distribution/#download-section 
