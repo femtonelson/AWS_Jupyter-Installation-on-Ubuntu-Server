@@ -1,9 +1,8 @@
 # AWS Tutorials
 ## Setup a Jumpbox (for management) + NAT instance + private machine in AWS VPC
-[Inspired from https://docs.aws.amazon.com/vpc/latest/userguide/VPC_NAT_Instance.html]
 
 # Step 0 : Objective
-- Setup a simple AWS VPC with 2 instances in a public subnet (reachable from internet) and an EC2 instance in a private subnet, not directly accessible to the internet, its requests will be forwarded through the NAT instance.
+- Install Jupyter Notebook
 - An EC2 instance in the public subnet called "Jumpbox", with a public IP and will serve for managing remotely all instances in the VPC
 - The other instance in the public subnet called "NAT instance", with a public IP, will perform NAT translations.
 - At the end of this exercise, FZ machine should be able to access the internet through the NAT instance and ping www.amazon.com or download a software package.
