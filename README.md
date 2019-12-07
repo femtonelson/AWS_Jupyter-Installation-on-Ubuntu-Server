@@ -24,12 +24,9 @@ In local CLI (Linux machine in this case), run :
 - $sudo -H pip3 install jupyter  : Install Jupyter using PIP
 - $sudo jupyter --version  : Check Jupyter version
 - $sudo nohup jupyter notebook --allow-root --ip 0.0.0.0 &  || Launch jupyter with root access, bind it with all IPs "0.0.0.0" to enable access from any public IP, type "&" to continue running Jupyter in background even after closing CLI, write the output of this command to the file "nohup"
-
 - $sudo cat nohup.out  || Display the content of the "nohup" file present in current directory and copy the URL containing the token : 
 <img src="./nohup.out.jpg">
-
 - Replace the private IP address by the public IP assigned to the server : http://aaa.bbb.ccc.ddd:8888/?token=7a657d52b4cfdf77a93de126b589f90bf0d277f7076f8020
-
 - Paste the output link in a web browser to access Jupyter Notebook. Successful ! At this stage, Jupyter Notebook app is up and running with the default Python3 environment 
   provided in the OS.
 <img src="./jupyter-notebook-ok.jpg">
@@ -40,33 +37,18 @@ The tool chosen here for Python virtual environment creation is Conda from the A
 Other options (not covered here) typically involve using "pip" (the recommended package installer) and "pew" (python environment wrapper), or pip and virtualenv. 
 Read more here : https://www.anaconda.com/understanding-conda-and-pip/
 
-- Get the URL of the latest Anaconda open-source distribution for Linux from https://www.anaconda.com/distribution/#download-section 
-
+- Get the URL of the latest Anaconda open-source distribution for Linux from : https://www.anaconda.com/distribution/#download-section 
 - $sudo curl -O https://repo.anaconda.com/archive/Anaconda3-2019.10-Linux-x86_64.sh  : Download Anaconda to the server. Downloaded version here is : "Anaconda3-2019.10-Linux-x86_64.sh"
 - $sudo bash Anaconda3-2019.10-Linux-x86_64.sh  : Install Anaconda. Chosen directory : /home/ubuntu/anaconda3
 <img src="./anaconda-installed-1.jpg">
 <img src="./anaconda-installed-2.jpg">
-
 - Launch Terminal from Jupyter Web Interface
 <img src="./terminal-from-web-int.jpg">
-
-
 - $conda create -n my-python3.6-virtualenv python=3.6  : Create Virtual environment with Python version 3.6
 <img src="./virtual-env-python3.6.jpg">
 
+python3 -m ipykernel install --user --name my-python3.6-virtualenv
 
-- sudo scp -i "My_key_pair.pem" My_key_pair.pem ec2-user@IP1:/home/ec2-user/ : Copy the private key by ssh from working dir on local 
-machine to Jumpbox at IP1 into the folder /home/ec2-user, same private key is used here for ssh connection
 
-- sudo ssh -i "My_key_pair.pem" ec2-user@IP1 : Connect by SSH to the Jumpbox -> Successful !
-<img src="./Connected to JB.jpg">
-Once connected to the Jumpbox, (private key already in the working directory) connect to FZ machine by running :                          - sudo ssh -i "My_key_pair.pem" ec2-user@10.0.6.145 : Connect to FZ machine  --> Successful !
-<img src="./Connected to FZ.jpg">
-- ping www.amazon.com  : Ping is successful! as traffic from FZ machine is routed through NAT instance, to the internet.
-<img src="./Ping to AMZ successful.jpg">
-- traceroute www.amazon.com : Traceroute shows the first hop is the NAT instance (10.0.4.124) --> Configuration successful !
-<img src="./Traceroute.jpg">
-- sudo wget https://download2.rstudio.org/rstudio-server-rhel-1.1.383-x86_64.rpm : Download a file from internet on FZ machine to check internet connectivity --> Download successful !
-<img src="./Test Download.jpg">
 
 
