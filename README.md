@@ -45,11 +45,17 @@ Read more here : https://www.anaconda.com/understanding-conda-and-pip/
 - Launch Terminal from Jupyter Web Interface
 <img src="./terminal-from-web-int.jpg">
 - $conda create -n my-python3.6-virtualenv python=3.6  : Create virtual environment with Python version 3.6
+
 - $conda create -n my-python3.8-virtualenv python=3.8  : Create virtual environment with Python version 3.8
+
 - $conda activate my-python3.6-virtualenv  : Activate virtual environment
+
 - $conda activate my-python3.8-virtualenv  : Activate virtual environment
+
 - $python3 -m ipykernel install --user --name my-python3.6-virtualenv  : Link virtual environment to Jupyter. Successful !
+
 - $python3 -m ipykernel install --user --name my-python3.8-virtualenv  : Link virtual environment to Jupyter. Successful !
+
 <img src="./virtual-envs-added-to-jupyter.jpg">
 
 
