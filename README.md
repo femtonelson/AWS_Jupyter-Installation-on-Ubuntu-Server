@@ -1,5 +1,3 @@
-[Inspired from ]
-
 # Step 0 : Objective
 - Install Jupyter on a publicly accessible Ubuntu server (AWS EC2 instance).
 - Configure two different Python virtual environments with Python3.6 and Python3.8 interpreters respectively
