@@ -1,5 +1,4 @@
-# AWS Tutorials
-## Setup a Jumpbox (for management) + NAT instance + private machine in AWS VPC
+[Inspired from ]
 
 # Step 0 : Objective
 - Install Jupyter Notebook
