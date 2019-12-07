@@ -6,12 +6,11 @@
 - Each Python virtual environment runs with its own specific interpreter, libraries, scripts
 - As such each virtual environment is isolated from others as well as from the default Python environment included in the operating system
 
-
-# Step 1 : Create a New VPC, Internet Gateway and 2 subnets 
-- Create a new VPC (Virtual Private Cloud), named "New_VPC" in the IPV4 address range, for instance : 10.0.0.0/16.
-- Create a new Internet Gateway "IGW" and attach to New_VPC.
-- Create a public subnet inside New_VPC, named "Public subnet" in the IPv4 address rang, for instance : 10.0.4.0/24.
-- Create a private subnet inside New_VPC, named "Private subnet" in the IPv4 address range, for instance : 10.0.6.0/23.
+# Step 1 : Launch Ubuntu Server instance on AWS inside a "public subnet", configure its Route Table, assign Public IP & Security Group
+- Inside a VPC, create a suitable subnet.
+- Configure its route table to allow routing to 0.0.0.0/0 through Internet Gateway.
+- Create a security group to allow incoming connections on port 22 (SSH), port 8888 (port on which Jupyter notebook server will run) and optionally ICMP (ping) port.
+- Launch Ubuntu 18.04 server instance (save private key "My_key_pair.pem"), assign VPC, subnet, security group created above.
 
 # Step 2 : Create 03 new Security Groups attached to New_VPC
 - Create a new SG "Private SG": In Inbound rules set [All traffic -> All protocols -> All ports -> 10.0.0.0/16] to enable all incoming traffic from within the VPC.
